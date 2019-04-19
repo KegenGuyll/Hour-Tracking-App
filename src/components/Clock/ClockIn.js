@@ -1,18 +1,20 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import { Button, Typography } from '@material-ui/core';
-import moment from 'moment'
+import moment from 'moment';
 
 export const ClockIn = () => {
-    let [clockIn, SetclockIn] = useState(null)
+  let [clockIn, setClockIn] = useState(null);
 
-    const handleclockin = () => {
-        SetclockIn(moment().format('h:mm:ss a'))
-    }
+  const handleclockin = () => {
+    setClockIn(moment().format('h:mm:ss a'));
+  };
 
-    return(
-        <div>
-            <Typography>{clockIn}</Typography>
-            <Button onClick={handleclockin} variant="contained" color="primary">Clockin</Button>
-        </div>
-    );
-}
+  return (
+    <div>
+      <Typography>{clockIn}</Typography>
+      <Button onClick={handleclockin} variant="contained" color="primary">
+        Clockin
+      </Button>
+    </div>
+  );
+};
