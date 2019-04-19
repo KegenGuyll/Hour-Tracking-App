@@ -14,8 +14,8 @@ class App extends Component {
             <Layout>
               <Switch>
                 <Route path='/' exact render={() => <Home />} />
-                <Route path='/settings' render={() => <Settings />} />
               </Switch>
+              <Settings />
             </Layout>
           </BottomNavigation>
         </Router>

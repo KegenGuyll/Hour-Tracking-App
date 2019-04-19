@@ -46,7 +46,6 @@ class Navigation extends Component {
             icon={<Add style={{ fontSize: '35px' }} />}
           />
           <BottomNavigationAction
-            onClick={() => this.handleRoute('/settings')}
             style={{ color: 'black' }}
             icon={<Settings style={{ fontSize: '30px' }} />}
           />
