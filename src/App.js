@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home } from './components/Home';
-import BottomNavigation from './components/Navigation/BottomNavigation';
-import { Settings } from './components/Settings';
+import { TopNavigation } from './components/Navigation/TopNavigation';
 import { Layout } from './components/Layout/Layout';
 
 class App extends Component {
@@ -10,14 +9,13 @@ class App extends Component {
     return (
       <div className='App'>
         <Router>
-          <BottomNavigation>
+          <TopNavigation>
             <Layout>
               <Switch>
                 <Route path='/' exact render={() => <Home />} />
               </Switch>
-              <Settings />
             </Layout>
-          </BottomNavigation>
+          </TopNavigation>
         </Router>
       </div>
     );

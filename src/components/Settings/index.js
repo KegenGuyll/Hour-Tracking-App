@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import {
   SwipeableDrawer,
   ListItem,
@@ -6,10 +6,10 @@ import {
   ListItemText,
   List
 } from '@material-ui/core';
-import { ExitToApp } from '@material-ui/icons';
+import { ExitToApp, AccountCircleRounded } from '@material-ui/icons';
 import firebase from 'firebase';
 
-export const Settings = props => {
+export const Settings = forwardRef((props, ref) => {
   let [swipe, setSwipe] = useState(false);
 
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -25,6 +25,15 @@ export const Settings = props => {
     setSwipe((swipe = !open));
   };
 
+  useImperativeHandle(ref, () => ({
+    activeSettings() {
+      const toggle = () => {
+        setSwipe((swipe = true));
+      };
+      toggle();
+    }
+  }));
+
   return (
     <SwipeableDrawer
       disableBackdropTransition={!iOS}
@@ -35,6 +44,12 @@ export const Settings = props => {
       onOpen={toggleDrawer(false)}
     >
       <List>
+        <ListItem>
+          <ListItemIcon>
+            <AccountCircleRounded />
+          </ListItemIcon>
+          <ListItemText>Profile</ListItemText>
+        </ListItem>
         <ListItem onClick={signout}>
           <ListItemIcon>
             <ExitToApp />
@@ -44,4 +59,4 @@ export const Settings = props => {
       </List>
     </SwipeableDrawer>
   );
-};
+});
