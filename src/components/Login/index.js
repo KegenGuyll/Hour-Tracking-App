@@ -51,6 +51,10 @@ const Login = props => {
   let [showPassword, setShowPassword] = useState(false);
   let [switchPage, setSwitchPage] = useState(false);
   let [error, setError] = useState('');
+  const Googleprovider = new firebase.auth.GoogleAuthProvider();
+  const Facebookprovider = new firebase.auth.FacebookAuthProvider();
+  const GitHubprovider = new firebase.auth.GithubAuthProvider();
+  const Twitterprovider = new firebase.auth.TwitterAuthProvider();
 
   const handleEmail = event => {
     setEmail((email = event.target.value));
@@ -66,6 +70,18 @@ const Login = props => {
 
   const page = () => {
     setSwitchPage((switchPage = !switchPage));
+  };
+
+  const handleSignIn = provider => {
+    firebase
+      .auth()
+      .signInWithRedirect(provider)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   const attemptAuth = async () => {
@@ -164,7 +180,7 @@ const Login = props => {
             <Button
               onClick={attemptAuth}
               style={{
-                background: '#139DF2',
+                background: 'rgb(7, 131, 208)',
                 color: 'white'
               }}
               variant='contained'
@@ -184,6 +200,44 @@ const Login = props => {
             </Button>
           </FormControl>
         </div>
+        <Grid justify='center' container direction='row'>
+          <IconButton
+            onClick={() => handleSignIn(Googleprovider)}
+            style={{ backgroundColor: 'white', margin: '12px' }}
+          >
+            <img
+              src='https://img.icons8.com/color/24/000000/google-logo.png'
+              alt='Google Sign In'
+            />
+          </IconButton>
+          <IconButton
+            onClick={() => handleSignIn(Twitterprovider)}
+            style={{ backgroundColor: 'white', margin: '12px' }}
+          >
+            <img
+              src='https://img.icons8.com/color/24/000000/twitter.png'
+              alt='Twitter Sign In'
+            />
+          </IconButton>
+          <IconButton
+            onClick={() => handleSignIn(Facebookprovider)}
+            style={{ backgroundColor: 'white', margin: '12px' }}
+          >
+            <img
+              src='https://img.icons8.com/color/24/000000/facebook.png'
+              alt='Facebook Sign In'
+            />
+          </IconButton>
+          <IconButton
+            onClick={() => handleSignIn(GitHubprovider)}
+            style={{ backgroundColor: 'white', margin: '12px' }}
+          >
+            <img
+              src='https://img.icons8.com/windows/24/000000/github.png'
+              alt='GitHub Sign In'
+            />
+          </IconButton>
+        </Grid>
       </Grid>
       <ToastContainer />
     </div>
